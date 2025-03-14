@@ -1,134 +1,54 @@
-Sukasa Air Seat Reservation API
+# Sukasa Air Seat Reservation System
 
-🚀 Overview
+## 📌 Overview  
+Sukasa Air aims to validate the market value of cheap air tickets with high-quality facilities by developing a scalable reservation system. This application provides the following key functionalities:  
+- **User authentication** (`/login`)  
+- **Seat reservation** (`/seat/reserve`)  
+- **Seat reset (Admin only)** (`/seat/reset`)  
 
-Sukasa Air is launching a market validation MVP for affordable airline tickets with high-quality facilities. This API provides authentication and seat reservation functionalities, ensuring reliable and high-demand handling.
+## 📑 API Endpoints
 
-📌 Features
+| Endpoint        | Method | Input Body  | Response |
+|---------------|--------|------------|---------|
+| `/login`      | POST   | `{ "emailId": "user@example.com" }` | `{ "token": "session_token" }` |
+| `/seat/reserve` | POST  | `{ "seatNumber": 5, "passengerPhone": "1234567890", "passengerName": "John Doe", "passengerAge": 25 }` | `{ "success": "Seat reserved successfully" }` |
+| `/seat/reset` | POST   | `NA` | `{ "success": "All seat reservations reset successfully" }` (Admin Only) |
 
-User Authentication: Login with email to receive a session token.
+## 🏗️ Tech Stack  
+- **Golang** (Gin Framework)  
+- **MongoDB** (Seat reservations storage)  
+- **Redis** (Session management)  
+- **JWT Authentication**  
 
-Seat Reservation: Reserve seats (1-300) with passenger details.
+## 🔧 Setup & Installation  
 
-Reset Reservations: Admin-only endpoint to reset all seat reservations.
+### Prerequisites  
+- Go 1.18+  
+- MongoDB & Redis running locally  
 
-High Availability: Ensures consistency in seat booking confirmations.
+### Steps  
+1. Clone the repository:  
+   ```sh  
+   git clone https://github.com/yourusername/sukasa-air.git  
+   cd sukasa-air  
+   ```  
+2. Install dependencies:  
+   ```sh  
+   go mod tidy  
+   ```  
+3. Start MongoDB & Redis (if not running):  
+   ```sh  
+   brew services start mongodb-community@7.0
+   brew services start redis
+   ```  
+4. Run the server:  
+   ```sh  
+   go run main.go  
+   ```  
 
-MongoDB Integration: Uses MongoDB as the primary database.
 
-📜 API Endpoints
-
-🔑 Authentication
-
-POST /login
-
-Request Body:
-
-{
-  "emailId": "user@example.com"
-}
-
-Response:
-
-{
-  "token": "session_token_here"
-}
-
-✈️ Seat Reservation
-
-POST /seat/reserve
-
-Request Body:
-
-{
-  "seatNumber": 25,
-  "passengerPhone": "1234567890",
-  "passengerName": "John Doe",
-  "passengerAge": 30
-}
-
-Response:
-
-{
-  "status": "success",
-  "message": "Seat 25 reserved successfully."
-}
-
-🛑 Reset Reservations (Admin Only)
-
-POST /seat/reset
-
-Request Body: None
-Response:
-
-{
-  "status": "success",
-  "message": "All seat reservations reset successfully."
-}
-
-⚙️ Tech Stack
-
-Golang (Backend API)
-
-MongoDB (Database)
-
-Redis (Session management & caching)
-
-Gin (Web framework for Golang)
-
-Swagger (API Documentation)
-
-🏗️ Setup & Installation
-
-1️⃣ Clone the repository
-
-git clone https://github.com/yourusername/SukasaAir.git
-cd sukasa-air
-
-2️⃣ Install dependencies
-
-go mod tidy
-
-3️⃣ Run the server
-
-go run main.go
-
-Server runs at http://localhost:8080
-
-🛠️ Running Tests & Coverage
-
-go test ./... -coverprofile=coverage.out
-
-To generate a coverage report:
-
-go tool cover -html=coverage.out -o coverage.html
-
-📜 API Documentation
-
-Swagger documentation is available at:
-
-http://localhost:8080/swagger/index.html
-
-✅ Project Constraints
-
-Minimum 80% test coverage
-
-Modular & maintainable code for scalability
-
-Ensures booking consistency under high demand
-
-Uses MongoDB for data storage
-
-📌 Version Control & Contribution
-
-Follow best practices for commits (git commit -m "feat: added seat reservation")
-
-Use GitHub Issues & PRs for contributions
-
-📜 License
-
-MIT License
-
-🛫 Sukasa Air - Book with confidence!
-
-# Sukasa-Air
+## 📜 API Documentation  
+Swagger docs available at:  
+```
+http://localhost:8080/swagger/index.html  
+```  
